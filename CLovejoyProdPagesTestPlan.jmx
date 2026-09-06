@@ -1,0 +1,1717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="CLovejoyProdPagesTest Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="host" elementType="Argument">
+            <stringProp name="Argument.name">host</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc"></stringProp>
+          </elementProp>
+          <elementProp name="pageContentHeader" elementType="Argument">
+            <stringProp name="Argument.name">pageContentHeader</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Used to limit  the links we extract and use to those that fall under this heading in the page request response</stringProp>
+          </elementProp>
+          <elementProp name="ratePerMin" elementType="Argument">
+            <stringProp name="Argument.name">ratePerMin</stringProp>
+            <stringProp name="Argument.value">5.0</stringProp>
+            <stringProp name="Argument.desc">Used with a Constant Throughput Timer (Product Page Action Rate Controller) to control rate of execution.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="drillLevelMax" elementType="Argument">
+            <stringProp name="Argument.name">drillLevelMax</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">A value of 2: level 0 = main page, level 1 = hitting a link in the left column of the main page, level 2 = hitting a link in the left column of the level 1 page</stringProp>
+          </elementProp>
+          <elementProp name="numItersToDoBeforeTriggerSortTypeChange" elementType="Argument">
+            <stringProp name="Argument.name">numItersToDoBeforeTriggerSortTypeChange</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">Set to 0 or less to not have sort type changes during the test</stringProp>
+          </elementProp>
+          <elementProp name="sortStrs" elementType="Argument">
+            <stringProp name="Argument.name">sortStrs</stringProp>
+            <stringProp name="Argument.value">order=date_asc&amp;order=price_asc&amp;order=price_desc&amp;order=date_desc&amp;order=rating_asc&amp;order=rating_desc</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">&amp; separated items</stringProp>
+          </elementProp>
+          <elementProp name="debug" elementType="Argument">
+            <stringProp name="Argument.name">debug</stringProp>
+            <stringProp name="Argument.value">false</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">true or false to control debug output</stringProp>
+          </elementProp>
+          <elementProp name="scheme" elementType="Argument">
+            <stringProp name="Argument.name">scheme</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <stringProp name="HTTPSampler.domain">www.webstaurantstore.com</stringProp>
+        <stringProp name="HTTPSampler.protocol">https</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.implementation"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">false</boolProp>
+        <boolProp name="useExpires">true</boolProp>
+        <boolProp name="CacheManager.controlledByThread">true</boolProp>
+      </CacheManager>
+      <hashTree/>
+      <ResultAction guiclass="ResultActionGui" testclass="ResultAction" testname="Result Status Action Handler" enabled="true">
+        <intProp name="OnError.action">3</intProp>
+      </ResultAction>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Page Objects Class Setup" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.util.regex.Pattern
+import java.util.regex.Matcher
+
+
+/*********************************************************************************************************/
+/****  PageObjects Class To Store Product paths and pagination information for each navigation level  ****/
+/*********************************************************************************************************/
+
+public class PageObjects {
+	private String[] productPicPathArr
+	private String[] sideColPathArr
+	private Random rnd
+	public Boolean onFirstPage
+	public int totalPages
+	public int currentPage
+	public int pageSize
+	public int nextPage
+	public String returnToPagePath
+
+	PageObjects() {
+		this.rnd = new Random()
+		this.productPicPathArr = []
+		this.sideColPathArr = []
+		this.onFirstPage = false
+		this.totalPages = 0
+		this.currentPage = 0
+		this.pageSize = 0
+		this.nextPage = 0
+		this.returnToPagePath = &quot;&quot;
+	}
+
+	// Populate the link arrays (product picture links and left column filter links).
+
+	// A PathsToStore value of -1 means store all match values found.  If the colPathsToStore value is null,
+	// attempt to use the returnToPagePath string value to create a regex pattern.
+	void processLinkStrings(String pathsBlockStr, Pattern colPathRxPattern, int picPathsToStore, int colPathsToStore) {
+		this.productPicPathArr = []
+		this.sideColPathArr = []
+
+		if (pathsBlockStr?.trim().isEmpty()) {
+			return
+		}
+
+		// find the picture paths on the page
+		// Example of what we&apos;re looking for: href=&quot;/outlet/344LGD15/95283.html&quot;
+		Pattern picPattern = ~/href=\&quot;(\/outlet\/.*?\/\d+\.html)\&quot;/
+		this.productPicPathArr = PageObjects.getArrayFromPattern(this.rnd, pathsBlockStr, picPattern, picPathsToStore)
+
+		// If we found no picture paths on this page, don&apos;t bother with finding left column links.  The test logic should move
+		// on rather than attempt to exercise any of the left column links if they lead to empty results.
+		if (this.productPicPathArr.size() == 0 || colPathsToStore == 0) {
+			return
+		}
+		
+		if (colPathRxPattern != null) {
+			// Use the Pattern variable passed to us to extract our links.
+			this.sideColPathArr = PageObjects.getArrayFromPattern(this.rnd, pathsBlockStr, colPathRxPattern, colPathsToStore)
+		} else {
+			// Attempt to create a pattern from the returnToPagePath string value.
+			Pattern generatedPat = PageObjects.getPatternFromReturnToPagePath(this.returnToPagePath)
+			this.sideColPathArr = PageObjects.getArrayFromPattern(this.rnd, pathsBlockStr, generatedPat, colPathsToStore)
+		}
+	}
+
+	// Save the pagination details
+	void processPaginationStrings(String totNumItemsStr, String currPageStr, String pageSizeStr, String totPagesStr, String onFirstPageStr) {
+		this.onFirstPage = false
+		this.totalPages = 0
+		this.currentPage = 0
+		this.pageSize = 0
+		this.nextPage = 0
+		int totalItems = 0
+
+		if (totNumItemsStr?.trim().isEmpty() || currPageStr?.trim().isEmpty() || pageSizeStr?.trim().isEmpty() || totPagesStr?.trim().isEmpty() || onFirstPageStr?.trim().isEmpty()) {
+			return
+		}
+		
+		totalItems = totNumItemsStr.trim().toInteger()
+		this.currentPage  = currPageStr.trim().toInteger()
+		this.nextPage = this.currentPage
+		this.pageSize = pageSizeStr.trim().toInteger()
+		this.totalPages = totPagesStr.trim().toInteger()
+		this.onFirstPage = Boolean.parseBoolean(onFirstPageStr.trim())
+		
+		// Assuming less than 10 items on the last page is not enough items when looping over the page and selecting items randomly - many duplicate selections?
+		// Subtracting 1 from the total number of pages to choose from if the conditions fit (below) - we have more than 1 page, our current page is not
+		// the last page, and the last page contains less than 10 items = subtract 1 from the total pages we will choose to operate on.
+		if (this.totalPages &gt; 1 &amp;&amp; this.currentPage &lt; this.totalPages) {
+			if (totalItems % this.pageSize &lt; 10) {
+				this.totalPages -= 1
+			}
+		}
+	}
+
+	String getRandomPicPath() {
+		if (this.productPicPathArr.size() == 0) {
+			throw new Exception(&quot;productPicPathArr is an empty array&quot;)
+		}
+		
+		this.productPicPathArr[this.rnd.nextInt(this.productPicPathArr.size())]
+	}
+
+	Boolean productPicPathArrHasEntries() {
+		this.productPicPathArr.size() &gt; 0
+	}
+
+	String getRandomSideColPath() {
+		if (this.sideColPathArr.size() == 0) {
+			throw new Exception(&quot;sideColPathArr is an empty array&quot;)
+		}
+
+		this.sideColPathArr[this.rnd.nextInt(this.sideColPathArr.size())].replace(&apos;&amp;amp;&apos;,&apos;&amp;&apos;)
+	}
+
+	Boolean sideColPathArrHasEntries() {
+		this.sideColPathArr.size() &gt; 0
+	}
+
+	// Call this prior to attempting a result page change - will get a new page number  at random while ensuring we don&apos;t
+	// land on the same page number already being viewed.
+	void setNewRandomNextPage() {
+		if (this.totalPages == 0) {
+			throw new Exception(&quot;totalPages is 0&quot;)
+		}
+
+		// Make sure we get a page number that is different than the currentPage.
+		if (this.totalPages &gt; 1) {
+			this.nextPage = this.currentPage
+			while (nextPage == this.currentPage) {
+				nextPage = this.rnd.nextInt(this.totalPages) + 1
+			}
+		} else {
+			this.nextPage = 1
+		}
+	}
+
+	Boolean nextPageIsDifferentThanCurrentPage() {
+		this.nextPage != this.currentPage
+	}
+
+
+	// Set the return path to the current page that we just landed on.  In the post processors, call the newly created 
+	// PageObjects setReturnPath method with the true URL we landed on.
+	void setReturnPath(String path) {
+		if (path == null) {
+			this.returnToPagePath = &quot;&quot;
+			return
+		}
+
+		String newPath = path.trim()
+		
+		if (path.contains(&quot;https://&quot;)) {
+			String[] parts = newPath.split(&apos;/&apos;)
+			newPath = parts[-1]
+		}
+		
+		this.returnToPagePath = newPath
+	}
+
+
+	/***************************************************************************/
+	/****************************  STATIC METHODS  *****************************/
+	/***************************************************************************/
+
+	static Pattern getPatternFromReturnToPagePath(String pagePath) {
+		if (pagePath.isEmpty()) {
+			return null
+		}
+
+		String[] pathParts = pagePath.split(&apos;/&apos;)
+		String newPatStr = pathParts[-1].replace(&apos;&amp;&apos;,&apos;&amp;amp;&apos;)
+		String escapedPatStr = Pattern.quote(newPatStr)
+		return ~/href=\&quot;(\/${escapedPatStr}.*?)\&quot;/
+	}
+
+	static String[] getArrayFromPattern(Random rnd, String inputStr, Pattern pattern, int maxNumToSave) {
+		String[] returnArr = []
+		
+		if (pattern == null || maxNumToSave == 0) {
+			return returnArr
+		}
+
+		Matcher matcher = inputStr =~ pattern
+
+		if (matcher.size() == 0) {
+			return returnArr
+		}
+
+		List&lt;String&gt; valuesList = matcher.collect{ it[1] }
+		
+		if (maxNumToSave &lt; 0 || valuesList.size() &lt;= maxNumToSave) {
+			return valuesList as String[]
+		}
+
+		returnArr = new String[maxNumToSave]
+		for (int x = 0; x &lt; maxNumToSave; x++) {
+			returnArr[x] = valuesList[rnd.nextInt(valuesList.size())]
+		}
+
+		returnArr
+	}
+
+	// This will only handle the management of one new or revised query parameter at a time.  No value1=1&amp;value2=2 bundling of query parameters.
+	// Call this to retrieve a new page path for the next request.  In the post processors, call the newly created PageObjects setReturnPath
+	// method with the true URL we landed on.
+	static String calculateNewPagePath(String pagePath, String queryParam) {
+		if (queryParam?.trim().isEmpty() || pagePath?.trim().isEmpty()) {
+			return &quot;&quot;
+		}
+
+		String newPath = pagePath
+
+		def parts = queryParam.split(&apos;=&apos;, 2)
+		if (parts.size() != 2) {
+		   throw new Exception(&quot;Expected format &apos;key=value&apos;, got: ${queryParam}&quot;)
+		}
+		
+		String key = parts[0]
+		String value = parts[1]
+		
+		// Escape key in case it contains regex special chars
+		String escapedKey = Pattern.quote(key)
+		def pattern = ~/(?&lt;=^|[?&amp;])${escapedKey}=[^&amp;\r\n]*/
+		
+		if (newPath =~ pattern) {
+		   return newPath.replaceFirst(pattern, &quot;${key}=${value}&quot;)
+		} else {
+		   // key not found — append it
+		   String separator = newPath.contains(&apos;?&apos;) ? &apos;&amp;&apos; : &apos;?&apos;
+		   return &quot;${newPath}${separator}${key}=${value}&quot;
+		}
+	}
+	
+
+	/***************************************************************************/
+	/**************************  FOR DEBUGGING ONLY  ***************************/
+	/***************************************************************************/
+	
+	int getProductPathArrSize() {
+		this.productPicPathArr.size()
+	}
+
+	int getSideColPathArrSize() {
+		this.sideColPathArr.size()
+	}
+
+
+	/***************************************************************************/
+	/********************  GETTER AND SETTER OVERRIDES  ************************/
+	/***************************************************************************/
+
+	void setProductPicPathArr(String[] arr) {
+		throw new Exception(&quot;Cannot set productPicLinkPathArr&quot;)
+	}
+	String[] getProductPicPathArr() {
+		throw new Exception(&quot;Cannot get productPicLinkPathArr&quot;)
+	}
+	void setSideColPathArr(String[] arr) {
+		throw new Exception(&quot;Cannot set sideBarFilterPathArr&quot;)
+	}
+	String[] getSideColPathArr() {
+		throw new Exception(&quot;Cannot get sideBarFilterPathArr&quot;)
+	}
+	void setOnFirstPage(Boolean firstPage) {
+		throw new Exception(&quot;Cannot set onFirstPage&quot;)
+	}
+	void setTotalPages(int totPgs) {
+		throw new Exception(&quot;Cannot set totalPages&quot;)
+	}
+	void setCurrentPage(int currPg) {
+		throw new Exception(&quot;Cannot set currentPage&quot;)
+	}
+	void setPageSize(int pgSize) {
+		throw new Exception(&quot;Cannot set pageSize&quot;)
+	}
+	void setNextPage(int nextPg) {
+		throw new Exception(&quot;Cannot set nextPage&quot;)
+	}
+	void setReturnToPageUrl() {
+		throw new Exception(&quot;Cannot set returnToPageUrl&quot;)
+	}
+	void setSortQueryParm() {
+		throw new Exception(&quot;Cannot set sortQueryParm&quot;)
+	}
+} // END CLASS: PageObjects
+
+
+/******************************************************/
+/****  PageObjectsList Class to Store PageObjects  ****/
+/******************************************************/
+
+public class PageObjectsList {
+	private ArrayList&lt;PageObjects&gt; pageObjectsList
+
+	PageObjectsList() {
+		this.pageObjectsList = new ArrayList&lt;PageObjects&gt;()
+	}
+
+	void addPageObject(PageObjects pgObj) {
+		this.pageObjectsList.add(pgObj)
+	}
+
+	int pageObjectsListSize() {
+		this.pageObjectsList.size()
+	}
+
+	void removeLastObjectInList() {
+		if (!this.pageObjectsList.isEmpty()) {
+			this.pageObjectsList.removeLast()
+		}
+	}
+
+	PageObjects getLastObject() {
+		if (!this.pageObjectsList.isEmpty()) {
+			this.pageObjectsList.getLast()
+		} else {
+			null
+		}
+	}
+
+
+	/***************************************************************************/
+	/********************  GETTER AND SETTER OVERRIDES  ************************/
+	/***************************************************************************/
+	
+	ArrayList getPageObjectsList() {
+		throw new Exception(&quot;Cannot get pageObjectsList&quot;)
+	}
+	void setPageObjectsList() {
+		throw new Exception(&quot;Cannot set pageObjectsList&quot;)
+	}
+}  // END CLASS: PageObjectsList
+
+
+/*********************************************************************************************************/
+/****  TransactionControllerDispManager Class To help generate sampler label variables in realtime    ****/
+/*********************************************************************************************************/
+
+// Using the __groovy script approach for adding the level number to the sampler names is tedious and error prone when getting the 
+// page objects list instance and then calling the method to provide array size back to us.  Using this approach to manage the dynamic 
+// sampler name generation.
+public class TransactionControllerDispManager {
+	public int transDispPrevLevel
+	public int transDispCurrLevel
+	public int transDispNextLevel
+
+	TransactionControllerDispManager() {
+		this.transDispPrevLevel = 0
+		this.transDispCurrLevel = 0
+		this.transDispNextLevel = 1
+	}
+
+	void DrillingDeeper() {
+		this.transDispPrevLevel = this.transDispCurrLevel
+		this.transDispCurrLevel = this.transDispNextLevel
+		this.transDispNextLevel++
+	}
+
+	void ClimbingBackToTheSurface() {
+		this.transDispNextLevel = this.transDispCurrLevel
+		this.transDispCurrLevel = this.transDispPrevLevel 
+		this.transDispPrevLevel = this.transDispPrevLevel &gt; 0 ? this.transDispPrevLevel - 1 : 0
+	}
+
+
+	/***************************************************************************/
+	/********************  GETTER AND SETTER OVERRIDES  ************************/
+	/***************************************************************************/
+	
+	void setTransDispPrevLevel(int val) {
+		throw new Exception(&quot;Cannot set transDispPrevLevel&quot;)
+	}
+	void setTransDispCurrLevel(int val) {
+		throw new Exception(&quot;Cannot set transDispCurrLevel&quot;)
+	}
+	void setTransDispNextLevel(int val) {
+		throw new Exception(&quot;Cannot set transDispNextLevel&quot;)
+	}
+}
+
+
+
+/**********************************************************************/
+/****  Store Our Class Factories Here so Threads can Instantiate  ****/
+/**********************************************************************/
+
+
+props.put(&quot;page.object.factory&quot;, { -&gt; new PageObjects() })
+props.put(&quot;page.object.list.factory&quot;, { -&gt; new PageObjectsList() })
+props.put(&quot;trans.cont.label.factory&quot;, { -&gt; new TransactionControllerDispManager() })
+
+
+
+/******************************************/
+/****  Setup our array of sort values  ****/
+/******************************************/
+
+// convert our sortStrs user defined variables value to an array and store it.
+String[] sortStrsArr = []
+if (vars.get(&apos;numItersToDoBeforeTriggerSortTypeChange&apos;).toInteger() &gt; 0) {
+	sortStrsArr = vars.get(&apos;sortStrs&apos;).split(&apos;&amp;&apos;)
+
+	if (sortStrsArr.size() == 0) {
+		throw new Exception(&quot;sortStrs variable provides no sort values. Either provide sort values or set numItersToDoBeforeTriggerSortTypeChange to less than 1&quot;)
+	}
+}
+
+props.put(&apos;sort.vals.arr&apos;, sortStrsArr)
+
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Set Ignore" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">prev.setIgnore()</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="productThreadGroup" enabled="true">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <longProp name="ThreadGroup.duration">900</longProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Common Assertion" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">
+// Preprocessors store a variable called &apos;err&apos; with &apos;true&apos; if an exception occurs.  If we find that we have an &apos;err&apos; variable with &apos;true&apos;,
+// set the sample to unsuccessful so the Result Status Action Handler will stop the test for us.
+
+String err = vars.get(&apos;err&apos;)
+if (err != null &amp;&amp; err == &quot;true&quot;) {
+	prev.setSuccessful(false)
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Assertion>
+        <hashTree/>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <intProp name="calcMode">2</intProp>
+          <stringProp name="throughput">${ratePerMin}</stringProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="ONCE ONLY: Go To Starting Main Page - Level 0 - and Change Result Page Number if Available" enabled="true"/>
+        <hashTree>
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoToStartingPage_Level0" enabled="true">
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.proxyHost"></stringProp>
+            <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+            <stringProp name="HTTPSampler.proxyPort"></stringProp>
+            <stringProp name="HTTPSampler.proxyUser"></stringProp>
+            <stringProp name="HTTPSampler.proxyPass"></stringProp>
+            <stringProp name="version">3.2.0</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/outlet.html</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+            <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+            <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+            <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+            <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+            <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+            <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+          </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="GoToStartingMain_Level0  Logging and Set sortOrderInUse" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">
+try {
+
+	/****************************************************************/
+	/****  Initialize some setup variables here for each thread  ****/
+	/****************************************************************/
+
+	vars.putObject(&apos;sortIdx&apos;, 0)
+	vars.put(&apos;sortVal&apos;,&quot;&quot;)
+	
+	String[] sortStrsArr = props.get(&apos;sort.vals.arr&apos;)
+	
+	if (sortStrsArr.size() &gt; 0) {
+		vars.put(&apos;nextSortVal&apos;, &quot;_&quot; + sortStrsArr[0])
+	} else {
+		vars.put(&apos;nextSortVal&apos;, &quot;ERROR&quot;)
+	}
+	
+	/*******************************************/
+	/****  Manage the sampler label values  ****/
+	/*******************************************/
+	
+	def labelFactory = props.get(&quot;trans.cont.label.factory&quot;)
+	def labelMgr = labelFactory.call()
+	
+	vars.put(&apos;transDispPrevLevel&apos;, labelMgr.transDispPrevLevel.toString())
+	vars.put(&apos;transDispCurrLevel&apos;, labelMgr.transDispCurrLevel.toString())
+	vars.put(&apos;transDispNextLevel&apos;, labelMgr.transDispNextLevel.toString())
+	vars.putObject(&apos;labelMgr&apos;, labelMgr)
+	
+	
+	log.info(&quot;Going to path = https://&quot; + vars.get(&apos;host&apos;) + &quot;/outlet.html&quot;)
+	
+} catch (Exception ex) {
+	vars.put(&apos;err&apos;, &apos;true&apos;)
+	throw ex
+}
+
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Pagination Details String Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+              <stringProp name="RegexExtractor.refname">paginationStr</stringProp>
+              <stringProp name="RegexExtractor.regex">\&quot;pagination\&quot;:\{\&quot;totalNumberOfItems\&quot;:([0-9]+),\&quot;currentPage\&quot;:([0-9]+),\&quot;pageSize\&quot;:([0-9]+),\&quot;totalPages\&quot;:([0-9]+),\&quot;onFirstPage\&quot;:([a-z]+)\}</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
+              <stringProp name="RegexExtractor.match_number">-1</stringProp>
+              <stringProp name="TestPlan.comments">Extract the pagination details here for use later.</stringProp>
+            </RegexExtractor>
+            <hashTree/>
+            <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Main Target Links String Block Extractor" enabled="true">
+              <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+              <stringProp name="BoundaryExtractor.refname">targetLinksStrBlock</stringProp>
+              <stringProp name="BoundaryExtractor.lboundary">&lt;h1 class=&quot;page-header&quot;&gt;${pageContentHeader}&lt;/h1&gt;</stringProp>
+              <stringProp name="BoundaryExtractor.rboundary">data-hypernova-id</stringProp>
+              <stringProp name="BoundaryExtractor.default"></stringProp>
+              <boolProp name="BoundaryExtractor.default_empty_value">true</boolProp>
+              <stringProp name="BoundaryExtractor.match_number">$1$</stringProp>
+              <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
+            </BoundaryExtractor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Level0 Page Object" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.util.regex.Pattern
+
+try {
+	/***************************************/
+	/**** Setup our PageObjects object  ****/
+	/***************************************/
+	
+	def factory = props.get(&apos;page.object.factory&apos;)
+	def pageObject = factory.call()
+
+	pageObject.setReturnPath(prev.getUrlAsString())
+	
+	// Example of what we&apos;re looking for: id=&quot;/outlet.html?category=4607&quot;
+	Pattern colPathPattern = ~/id=\&quot;(\/outlet.html\?.*?category=\d+.*?)\&quot;/
+	pageObject.processLinkStrings(vars.get(&apos;targetLinksStrBlock&apos;), colPathPattern, -1, 100)
+	pageObject.processPaginationStrings(vars.get(&apos;paginationStr_1_g1&apos;), vars.get(&apos;paginationStr_1_g2&apos;), vars.get(&apos;paginationStr_1_g3&apos;), vars.get(&apos;paginationStr_1_g4&apos;),  vars.get(&apos;paginationStr_1_g5&apos;))
+	
+	// Stage a next page number to navigate to if there is another page available (default is page 1)
+	pageObject.setNewRandomNextPage()
+	vars.remove(&quot;targetLinksStrBlock&quot;)
+	
+	
+	/*******************************************************/
+	/**** Add our PageObjects to the Page Objects List  ****/
+	/*******************************************************/
+	
+	def listFactory = props.get(&apos;page.object.list.factory&apos;)
+	def pageObjectList = listFactory.call()
+	
+	pageObjectList.addPageObject(pageObject)
+	vars.putObject(&quot;pageObjList&quot;, pageObjectList)
+
+	log.info(&quot;Found Picture Links = &quot; + pageObject.productPicPathArrHasEntries().toString() + &quot; / Found Left Column Links = &quot; + pageObject.sideColPathArrHasEntries().toString())
+
+
+
+	/************************/
+	/****  Debug Output  ****/
+	/************************/
+	
+	if (vars.get(&apos;debug&apos;).trim() == &apos;true&apos;) {
+		if (!pageObject.productPicPathArrHasEntries()) {
+			log.info(&quot;No entries in productPicPathArr&quot;)
+		} else {
+			log.info(&quot;pic link arr size = &quot; + pageObject.getProductPathArrSize().toString())
+			log.info(&quot;pic product link example = &quot; + pageObject.getRandomPicPath())
+		}
+		
+		log.info(&quot;currentPage = &quot; + pageObject.currentPage)
+		log.info(&quot;pageSize = &quot; + pageObject.pageSize)
+		log.info(&quot;onFirstPage = &quot; + pageObject.onFirstPage)
+		log.info(&quot;totalPages = &quot; + pageObject.totalPages)
+		log.info(&quot;nextPage = &quot; + pageObject.nextPage)
+		log.info(&quot;nextPageIsDifferentThanCurrentPage = &quot; + pageObject.nextPageIsDifferentThanCurrentPage())
+	
+		if (!pageObject.sideColPathArrHasEntries()) {
+			log.info(&quot;No entries in sideColPathArr&quot;)
+		} else {
+			log.info(&quot;left col link arr size = &quot; + pageObject.getSideColPathArrSize())
+			log.info(&quot;left col link example = &quot; + pageObject.getRandomSideColPath())
+		}
+	
+		log.info(&quot;pageObjectReturnToPagePath = &quot; + pageObject.returnToPagePath)
+		log.info(&quot;pageObjectListSize = &quot; + pageObjectList.pageObjectsListSize().toString())
+	}
+} catch (Exception ex) {
+	prev.setSuccessful(false)
+	throw ex
+}</stringProp>
+              <stringProp name="TestPlan.comments">Since we have to operate under the page heading &quot;WebstaurantStore Scratch and Dent Outlet&quot;, use PageObjects to parse out the response text extracted section for product links and store them</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Is A New Page Number Available To Go To" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().nextPageIsDifferentThanCurrentPage())}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoToAnotherResultPage_Level0_To_Page${nextPage}" enabled="true">
+              <boolProp name="HTTPSampler.image_parser">true</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <stringProp name="HTTPSampler.proxyHost"></stringProp>
+              <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+              <stringProp name="HTTPSampler.proxyPort"></stringProp>
+              <stringProp name="HTTPSampler.proxyUser"></stringProp>
+              <stringProp name="HTTPSampler.proxyPass"></stringProp>
+              <stringProp name="version">3.2.0</stringProp>
+              <stringProp name="HTTPSampler.port">443</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">${newPath}</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+              <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+              <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+              <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+              <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+              <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+              <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+              <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+              <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+              <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+              <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+            </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="GoToMainAnotherResultPage_Level0 Set newPath" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">
+try {
+	def pageObj = vars.getObject(&apos;pageObjList&apos;).getLastObject()
+	var nextPage = pageObj.nextPage.toString()
+	String newPath = pageObj.calculateNewPagePath(pageObj.returnToPagePath, &quot;page=&quot; + nextPage)
+	vars.put(&apos;newPath&apos;, newPath)
+	vars.put(&apos;nextPage&apos;, nextPage)
+	
+	log.info(&quot;Going to path = https://&quot; + vars.get(&apos;host&apos;) + pageObj.calculateNewPagePath(pageObj.returnToPagePath, &quot;page=&quot; + pageObj.nextPage.toString()))
+
+} catch (Exception ex) {
+	vars.put(&apos;err&apos;, &apos;true&apos;)
+	throw ex
+}</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Pagination Details String Extractor" enabled="true">
+                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                <stringProp name="RegexExtractor.refname">paginationStr</stringProp>
+                <stringProp name="RegexExtractor.regex">\&quot;pagination\&quot;:\{\&quot;totalNumberOfItems\&quot;:([0-9]+),\&quot;currentPage\&quot;:([0-9]+),\&quot;pageSize\&quot;:([0-9]+),\&quot;totalPages\&quot;:([0-9]+),\&quot;onFirstPage\&quot;:([a-z]+)\}</stringProp>
+                <stringProp name="RegexExtractor.template">$1$</stringProp>
+                <stringProp name="RegexExtractor.default"></stringProp>
+                <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
+                <stringProp name="RegexExtractor.match_number">-1</stringProp>
+                <stringProp name="TestPlan.comments">Extract the pagination details here for use later.</stringProp>
+              </RegexExtractor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Main Target Links String Block Extractor" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">targetLinksStrBlock</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;h1 class=&quot;page-header&quot;&gt;${pageContentHeader}&lt;/h1&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">data-hypernova-id</stringProp>
+                <stringProp name="BoundaryExtractor.default"></stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">true</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">$1$</stringProp>
+                <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Update Level0 Page Object - After Page Number Change" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import java.util.regex.Pattern
+
+try {
+	/******************************************/
+	/****  Update the current page object  ****/
+	/******************************************/
+	
+	def pageObject = vars.getObject(&apos;pageObjList&apos;).getLastObject()
+
+	pageObject.setReturnPath(prev.getUrlAsString())
+	
+	// Example of what we&apos;re looking for: id=&quot;/outlet.html?category=4607&quot;
+	Pattern colPathPattern = ~/id=\&quot;(\/outlet.html\?.*?category=\d+.*?)\&quot;/
+	pageObject.processLinkStrings(vars.get(&apos;targetLinksStrBlock&apos;), colPathPattern, -1, 50)
+	pageObject.processPaginationStrings(vars.get(&apos;paginationStr_1_g1&apos;), vars.get(&apos;paginationStr_1_g2&apos;), vars.get(&apos;paginationStr_1_g3&apos;), vars.get(&apos;paginationStr_1_g4&apos;),  vars.get(&apos;paginationStr_1_g5&apos;))
+	
+	vars.remove(&quot;targetLinksStrBlock&quot;)
+
+	log.info(&quot;Found Picture Links = &quot; + pageObject.productPicPathArrHasEntries().toString() + &quot; / Found Left Column Links = &quot; + pageObject.sideColPathArrHasEntries().toString())
+
+	
+	/************************/
+	/****  Debug Output  ****/
+	/************************/
+	
+	if (vars.get(&apos;debug&apos;).trim() == &apos;true&apos;) {
+		log.info(&quot;pic link arr size = &quot; + pageObject.getProductPathArrSize().toString())
+		log.info(&quot;pic product link example = &quot; + pageObject.getRandomPicPath())
+		
+		log.info(&quot;currentPage = &quot; + pageObject.currentPage)
+		log.info(&quot;pageSize = &quot; + pageObject.pageSize)
+		log.info(&quot;onFirstPage = &quot; + pageObject.onFirstPage)
+		log.info(&quot;totalPages = &quot; + pageObject.totalPages)
+		log.info(&quot;nextPage = &quot; + pageObject.nextPage)
+		log.info(&quot;nextPageIsDifferentThanCurrentPage = &quot; + pageObject.nextPageIsDifferentThanCurrentPage())
+		
+		log.info(&quot;left col link arr size = &quot; + pageObject.getSideColPathArrSize().toString())
+		log.info(&quot;left col link example = &quot; + pageObject.getRandomSideColPath())
+		log.info(&quot;pageObjectReturnToPageUrl = &quot; + pageObject.returnToPagePath)
+		log.info(&quot;pageObjectListSize = &quot; +  vars.getObject(&apos;pageObjList&apos;).pageObjectsListSize().toString())
+	}
+} catch (Exception ex) {
+	prev.setSuccessful(false)
+	throw ex
+}
+</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If  Iteration ${numItersToTriggerSortType} Change Sort Criteria" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(vars.get(&apos;numItersToDoBeforeTriggerSortTypeChange&apos;).toInteger() &gt; 0 ? (vars.get(&apos;__jm__productThreadGroup__idx&apos;).toInteger() + 1) % vars.get(&apos;numItersToDoBeforeTriggerSortTypeChange&apos;).toInteger() == 0 : false)}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoChangeSort_Level0_To${nextSortVal}" enabled="true">
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.proxyHost"></stringProp>
+            <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+            <stringProp name="HTTPSampler.proxyPort"></stringProp>
+            <stringProp name="HTTPSampler.proxyUser"></stringProp>
+            <stringProp name="HTTPSampler.proxyPass"></stringProp>
+            <stringProp name="version">3.2.0</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">${newPath}</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+            <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+            <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+            <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+            <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+            <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+            <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+          </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="GoChangeSort_Level0 Set newPath and sortVal" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">try {
+	def pageObj = vars.getObject(&apos;pageObjList&apos;).getLastObject()
+	String nextSortVal = vars.get(&apos;nextSortVal&apos;)
+
+	if (nextSortVal.startsWith(&apos;_&apos;)) {
+		nextSortVal = nextSortVal.drop(1)
+	}
+	
+	String newPath = pageObj.calculateNewPagePath(pageObj.returnToPagePath, nextSortVal)
+	vars.put(&apos;newPath&apos;, newPath)
+	
+	log.info(&quot;Going to path = https://&quot; + vars.get(&apos;host&apos;) + newPath)
+} catch (Exception ex) {
+	vars.put(&apos;err&apos;, &quot;true&quot;)
+	throw ex
+}</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Main Target Links String Block Extractor" enabled="true">
+              <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+              <stringProp name="BoundaryExtractor.refname">targetLinksStrBlock</stringProp>
+              <stringProp name="BoundaryExtractor.lboundary">&lt;h1 class=&quot;page-header&quot;&gt;${pageContentHeader}&lt;/h1&gt;</stringProp>
+              <stringProp name="BoundaryExtractor.rboundary">data-hypernova-id</stringProp>
+              <stringProp name="BoundaryExtractor.default"></stringProp>
+              <boolProp name="BoundaryExtractor.default_empty_value">true</boolProp>
+              <stringProp name="BoundaryExtractor.match_number">$1$</stringProp>
+              <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
+            </BoundaryExtractor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Update Level0 Page Object - Add Order" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.util.regex.Pattern
+
+try {
+	
+	/******************************************/
+	/****  Update the current page object  ****/
+	/******************************************/
+	
+	def pageObject = vars.getObject(&apos;pageObjList&apos;).getLastObject()
+
+	String landedUrl = prev.getUrlAsString()
+
+	pageObject.setReturnPath(landedUrl)
+	
+	Pattern colPathPattern = ~/id=\&quot;(\/outlet.html\?.*?category=\d+.*?)\&quot;/
+	pageObject.processLinkStrings(vars.get(&apos;targetLinksStrBlock&apos;), colPathPattern, -1, 50)
+	// Not redoing the pagination details as they shouldn&apos;t have changed.
+	//pageObject.processPaginationStrings(vars.get(&apos;paginationStr_1_g1&apos;), vars.get(&apos;paginationStr_1_g2&apos;), vars.get(&apos;paginationStr_1_g3&apos;), vars.get(&apos;paginationStr_1_g4&apos;),  vars.get(&apos;paginationStr_1_g5&apos;))
+	
+	vars.remove(&quot;targetLinksStrBlock&quot;)
+
+	log.info(&quot;Found Picture Links = &quot; + pageObject.productPicPathArrHasEntries().toString() + &quot; / Found Left Column Links = &quot; + pageObject.sideColPathArrHasEntries().toString())
+
+
+	/**************************************************************************************************************/
+	/****  Stage the next sort value so it can be included in the Transaction Controller name in the results.  ****/
+	/**************************************************************************************************************/
+
+	String nextSortVal = vars.get(&apos;nextSortVal&apos;)
+	vars.put(&apos;sortVal&apos;, nextSortVal)
+
+	// if the URL we landed on doesn&apos;t contain the new sort value as a query string parameter, something went wrong!
+	// throw an exception so the test will be stopped.
+	if (nextSortVal.startsWith(&apos;_&apos;)) {
+		nextSortVal = nextSortVal.drop(1)
+	}
+
+	if (!landedUrl.contains(nextSortVal)) {
+		throw new Exception(landedUrl + &quot; does not contain our new sort parameter = &quot; + nextSortVal)
+	}
+
+	// Stage the next sort string we&apos;ll be using when we come back to this request.
+	def sortStrsArr = props.get(&apos;sort.vals.arr&apos;)
+	int idx = vars.getObject(&apos;sortIdx&apos;)
+
+	if (idx &gt;= sortStrsArr.size() - 1) {
+		idx = 0
+	} else {
+		idx++
+	}
+	
+	vars.putObject(&apos;sortIdx&apos;, idx)
+	vars.put(&apos;nextSortVal&apos;, &quot;_&quot; + sortStrsArr[idx].trim())
+
+	
+	/************************/
+	/****  Debug Output  ****/
+	/************************/
+	
+	if (vars.get(&apos;debug&apos;).trim() == &apos;true&apos;) {
+		log.info(&quot;pic link arr size = &quot; + pageObject.getProductPathArrSize().toString())
+		log.info(&quot;pic product link example = &quot; + pageObject.getRandomPicPath())
+		
+		log.info(&quot;currentPage = &quot; + pageObject.currentPage)
+		log.info(&quot;pageSize = &quot; + pageObject.pageSize)
+		log.info(&quot;onFirstPage = &quot; + pageObject.onFirstPage)
+		log.info(&quot;totalPages = &quot; + pageObject.totalPages)
+		log.info(&quot;nextPage = &quot; + pageObject.nextPage)
+		log.info(&quot;nextPageIsDifferentThanCurrentPage = &quot; + pageObject.nextPageIsDifferentThanCurrentPage())
+		
+		log.info(&quot;left col link arr size = &quot; + pageObject.getSideColPathArrSize().toString())
+		log.info(&quot;left col link example = &quot; + pageObject.getRandomSideColPath())
+		log.info(&quot;pageObjectReturnToPageUrl = &quot; + pageObject.returnToPagePath)
+		log.info(&quot;pageObjectListSize = &quot; +  vars.getObject(&apos;pageObjList&apos;).pageObjectsListSize().toString())
+	}
+} catch (Exception ex) {
+	prev.setSuccessful(false)
+	throw ex
+}
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Picture Paths On This Main Page" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().productPicPathArrHasEntries())}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="GoToProductPictureController" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="402066857">CLovejoyProdPagesTest Plan</stringProp>
+              <stringProp name="-1675366874">productThreadGroup</stringProp>
+              <stringProp name="-1360059698">GoToProductPictureController</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LC_DrillDownLevels " enabled="true">
+          <stringProp name="LoopController.loops">${drillLevelMax}</stringProp>
+        </LoopController>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Left Column Links on this Page" enabled="true">
+            <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().sideColPathArrHasEntries())}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="SelectLeftColumnPath_Level${transDispNextLevel}${sortVal}" enabled="true">
+              <boolProp name="HTTPSampler.image_parser">true</boolProp>
+              <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+              <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              <stringProp name="HTTPSampler.proxyHost"></stringProp>
+              <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+              <stringProp name="HTTPSampler.proxyPort"></stringProp>
+              <stringProp name="HTTPSampler.proxyUser"></stringProp>
+              <stringProp name="HTTPSampler.proxyPass"></stringProp>
+              <stringProp name="version">3.2.0</stringProp>
+              <stringProp name="HTTPSampler.port">443</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">${newPath}</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+              <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+              <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+              <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+              <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+              <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+              <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+              <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+              <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+              <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+              <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+              <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+            </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set newPath Level${transDispNextLevel}" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">try {
+	String pathToUse = vars.getObject(&apos;pageObjList&apos;).getLastObject().getRandomSideColPath()
+	vars.put(&apos;newPath&apos;, pathToUse)
+
+	log.info(&quot;Going to path = https://&quot; + vars.get(&apos;host&apos;) + pathToUse)
+} catch (Exception ex) {
+	vars.put(&apos;err&apos;, &apos;true&apos;)
+	throw ex
+}
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Left Col Links String Block Extractor" enabled="true">
+                <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
+                <stringProp name="BoundaryExtractor.refname">targetLinksStrBlock</stringProp>
+                <stringProp name="BoundaryExtractor.lboundary">&lt;h1 class=&quot;page-header&quot;&gt;${pageContentHeader}&lt;/h1&gt;</stringProp>
+                <stringProp name="BoundaryExtractor.rboundary">data-hypernova-id</stringProp>
+                <stringProp name="BoundaryExtractor.default"></stringProp>
+                <boolProp name="BoundaryExtractor.default_empty_value">true</boolProp>
+                <stringProp name="BoundaryExtractor.match_number">$1$</stringProp>
+                <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
+              </BoundaryExtractor>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Level${transDispNextLevel} Page Object" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script"> import java.util.regex.Pattern
+
+try {
+
+	/***************************************/
+	/**** Setup our PageObjects object  ****/
+	/***************************************/
+	
+	def factory = props.get(&apos;page.object.factory&apos;)
+	def pageObject = factory.call()
+
+	pageObject.setReturnPath(prev.getUrlAsString())
+	
+	// Example of what we&apos;re looking for: href=&quot;/outlet.html?category=13765&amp;amp;filter=type:cutters-slicers&quot;
+	//Pattern colPathPattern = ~/href=\&quot;(\/outlet.html\?.*?category=\d+&amp;amp;.*?)\&quot;/
+	pageObject.processLinkStrings(vars.get(&apos;targetLinksStrBlock&apos;), null, -1, 50)
+	//pageObject.processPaginationStrings(vars.get(&apos;paginationStr_1_g1&apos;), vars.get(&apos;paginationStr_1_g2&apos;), vars.get(&apos;paginationStr_1_g3&apos;), vars.get(&apos;paginationStr_1_g4&apos;),  vars.get(&apos;paginationStr_1_g5&apos;))
+	
+	
+	// Stage a next page number to navigate to if there is another page available (default is page 1)
+	//pageObject.setNewRandomNextPage()
+	vars.remove(&quot;targetLinksStrBlock&quot;)
+	
+	
+	/*******************************************************/
+	/**** Add our PageObjects to the Page Objects List  ****/
+	/*******************************************************/
+	
+	def pageObjList = vars.getObject(&apos;pageObjList&apos;)
+	pageObjList.addPageObject(pageObject)
+
+	log.info(&quot;Found Picture Links = &quot; + pageObject.productPicPathArrHasEntries().toString() + &quot; / Found Left Column Links = &quot; + pageObject.sideColPathArrHasEntries().toString())
+
+
+	/*******************************************/
+	/****  Manage the sampler label values  ****/
+	/*******************************************/
+
+	def labelMgr = vars.getObject(&apos;labelMgr&apos;)
+	labelMgr.DrillingDeeper()
+
+	vars.put(&apos;transDispPrevLevel&apos;, labelMgr.transDispPrevLevel.toString())
+	vars.put(&apos;transDispCurrLevel&apos;, labelMgr.transDispCurrLevel.toString())
+	vars.put(&apos;transDispNextLevel&apos;, labelMgr.transDispNextLevel.toString())
+	vars.putObject(&apos;labelMgr&apos;, labelMgr)
+	
+	
+	/************************/
+	/****  Debug Output  ****/
+	/************************/
+	
+	if (vars.get(&apos;debug&apos;).trim() == &apos;true&apos;) {
+		if (!pageObject.productPicPathArrHasEntries()) {
+			log.info(&quot;No entries in productPicPathArr&quot;)
+		} else {
+			log.info(&quot;pic link arr size = &quot; + pageObject.getProductPathArrSize().toString())
+			log.info(&quot;pic product link example = &quot; + pageObject.getRandomPicPath())
+		}
+		
+		log.info(&quot;currentPage = &quot; + pageObject.currentPage)
+		log.info(&quot;pageSize = &quot; + pageObject.pageSize)
+		log.info(&quot;onFirstPage = &quot; + pageObject.onFirstPage)
+		log.info(&quot;totalPages = &quot; + pageObject.totalPages)
+		log.info(&quot;nextPage = &quot; + pageObject.nextPage)
+		log.info(&quot;nextPageIsDifferentThanCurrentPage = &quot; + pageObject.nextPageIsDifferentThanCurrentPage())
+	
+		if (!pageObject.sideColPathArrHasEntries()) {
+			log.info(&quot;No entries in sideColPathArr&quot;)
+		} else {
+			log.info(&quot;left col link arr size = &quot; + pageObject.getSideColPathArrSize().toString())
+			log.info(&quot;left col link example = &quot; + pageObject.getRandomSideColPath())
+		}
+	
+		log.info(&quot;pageObjectReturnToPagePath = &quot; + pageObject.returnToPagePath)
+		log.info(&quot;pageObjectListSize = &quot; + pageObjList.pageObjectsListSize().toString())
+		log.info(&quot;pathUrlCalledToGetHere = &quot; + prev.getUrlAsString())
+	}
+} catch (Exception ex) {
+	prev.setSuccessful(false)
+	throw ex
+}
+</stringProp>
+                <stringProp name="TestPlan.comments">Since we have to operate under the page heading &quot;WebstaurantStore Scratch and Dent Outlet&quot;, use PageObjects to parse out the response text extracted section for product links and store them</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Pic Paths Available on this Page" enabled="true">
+              <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().productPicPathArrHasEntries())}</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+              <boolProp name="IfController.useExpression">true</boolProp>
+            </IfController>
+            <hashTree>
+              <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="GoToProductPictureController" enabled="true">
+                <collectionProp name="ModuleController.node_path">
+                  <stringProp name="764597751">Test Plan</stringProp>
+                  <stringProp name="402066857">CLovejoyProdPagesTest Plan</stringProp>
+                  <stringProp name="-1675366874">productThreadGroup</stringProp>
+                  <stringProp name="-1360059698">GoToProductPictureController</stringProp>
+                </collectionProp>
+              </ModuleController>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller Going Back To Level 0 Page" enabled="true">
+          <stringProp name="WhileController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).pageObjectsListSize() &gt; 1)}</stringProp>
+        </WhileController>
+        <hashTree>
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoBackToPreviousPage_Level${transDispPrevLevel}${sortVal}" enabled="true">
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.proxyHost"></stringProp>
+            <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+            <stringProp name="HTTPSampler.proxyPort"></stringProp>
+            <stringProp name="HTTPSampler.proxyUser"></stringProp>
+            <stringProp name="HTTPSampler.proxyPass"></stringProp>
+            <stringProp name="version">3.2.0</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().returnToPagePath)}</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+            <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+            <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+            <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+            <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+            <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+            <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+          </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Remove Current Page Object_Level${transDispPrevLevel}" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">try {
+
+	/*************************************************************************************************/
+	/****  Remove the current PageObject from the PageObjectsList as we&apos;re going back up a level  ****/
+	/*************************************************************************************************/
+	
+	def pageObjList = vars.getObject(&apos;pageObjList&apos;)
+	
+	// Remove the current Page Object from the list and use the last Page Object to get the return path.
+	pageObjList.removeLastObjectInList()
+	
+	log.info(&quot;Going back to path = https://&quot; + vars.get(&apos;host&apos;) + pageObjList.getLastObject().returnToPagePath)
+} catch (Exception ex) {
+	vars.put(&apos;err&apos;, &apos;true&apos;)
+	throw ex
+}
+
+
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Manage the Level Display" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">/*******************************************/
+/****  Manage the sampler label values  ****/
+/*******************************************/
+
+try {
+	def labelMgr = vars.getObject(&apos;labelMgr&apos;)
+	labelMgr.ClimbingBackToTheSurface()
+	
+	vars.put(&apos;transDispPrevLevel&apos;, labelMgr.transDispPrevLevel.toString())
+	vars.put(&apos;transDispCurrLevel&apos;, labelMgr.transDispCurrLevel.toString())
+	vars.put(&apos;transDispNextLevel&apos;, labelMgr.transDispNextLevel.toString())
+} catch (Exception ex) {
+	prev.setSuccessful(false)
+	throw ex
+}
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+            <CompareAssertion guiclass="TestBeanGUI" testclass="CompareAssertion" testname="Compare Assertion" enabled="true">
+              <boolProp name="compareContent">true</boolProp>
+              <longProp name="compareTime">-1</longProp>
+              <collectionProp name="stringsToSkip"/>
+            </CompareAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GoToProductPictureController" enabled="false"/>
+        <hashTree>
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoProductPicture" enabled="true">
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.proxyHost"></stringProp>
+            <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+            <stringProp name="HTTPSampler.proxyPort"></stringProp>
+            <stringProp name="HTTPSampler.proxyUser"></stringProp>
+            <stringProp name="HTTPSampler.proxyPass"></stringProp>
+            <stringProp name="version">3.2.0</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">${picPathToUse}</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+            <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+            <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+            <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+            <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+            <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+            <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+          </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set picPathToUse" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">
+try {
+	String path = vars.getObject(&apos;pageObjList&apos;).getLastObject().getRandomPicPath()
+	vars.put(&apos;picPathToUse&apos;, path)
+	log.info(&quot;Going to path = https://&quot; + vars.get(&apos;host&apos;) + path)
+} catch (Exception ex) {
+	vars.put(&apos;err&apos;, &apos;true&apos;)
+	throw ex
+}
+
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="GoToProductLinkViaPicture Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="-1209048565">og:price:amount</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message">Did not find og:price:amount in the response to a GoToProductViaPicture request.</stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoBackToPreviousPage_Level${transDispCurrLevel}${sortVal}" enabled="true">
+            <boolProp name="HTTPSampler.image_parser">true</boolProp>
+            <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="HTTPSampler.proxyHost"></stringProp>
+            <stringProp name="HTTPSampler.proxyScheme"></stringProp>
+            <stringProp name="HTTPSampler.proxyPort"></stringProp>
+            <stringProp name="HTTPSampler.proxyUser"></stringProp>
+            <stringProp name="HTTPSampler.proxyPass"></stringProp>
+            <stringProp name="version">3.2.0</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().returnToPagePath)}</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <intProp name="HTTP2Sampler.uiTabIndex">0</intProp>
+            <boolProp name="HTTP2Sampler.http1_upgrade">false</boolProp>
+            <stringProp name="HTTP2Sampler.profile">browser-like</stringProp>
+            <boolProp name="HTTP2Sampler.enableHttp3">false</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp2">true</boolProp>
+            <boolProp name="HTTP2Sampler.enableHttp1">true</boolProp>
+            <boolProp name="HTTP2Sampler.alpnEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.fallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.protocolErrorFallbackEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.altSvcCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http1OnlyCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.h2cCacheEnabled">true</boolProp>
+            <boolProp name="HTTP2Sampler.http2PriorKnowledge">false</boolProp>
+            <stringProp name="HTTP2Sampler.happyEyeballsDelayMs">250</stringProp>
+            <stringProp name="HTTP2Sampler.http3BrokenCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.http1OnlyCooldownMs">300000</stringProp>
+            <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
+          </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="GoBackToPreviousPage_Level${transDispCurrLevel}${sortVal} Logging" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">log.info(&quot;Going back to path = https://&quot; + vars.get(&apos;host&apos;) + vars.getObject(&apos;pageObjList&apos;).getLastObject().returnToPagePath)
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>true</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">C:\Users\crglo\OneDrive\Desktop\Jb\Applied\WebstaurantStore\JMeter\result.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">C:\Users\crglo\OneDrive\Desktop\Jb\Applied\WebstaurantStore\JMeter\Result2\testresult2Master.jtl</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">C:\Users\crglo\OneDrive\Desktop\Jb\Applied\WebstaurantStore\JMeter\test2result.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">C:\Users\crglo\OneDrive\Desktop\Jb\Applied\WebstaurantStore\JMeter\Result2\testresult2Master.jtl</stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
