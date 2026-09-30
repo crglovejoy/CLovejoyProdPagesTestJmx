@@ -5,8 +5,6 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
@@ -82,7 +80,7 @@
         <boolProp name="CacheManager.controlledByThread">true</boolProp>
       </CacheManager>
       <hashTree/>
-      <ResultAction guiclass="ResultActionGui" testclass="ResultAction" testname="Result Status Action Handler" enabled="true">
+      <ResultAction guiclass="ResultActionGui" testclass="ResultAction" testname="Result Status Action Handler">
         <intProp name="OnError.action">3</intProp>
       </ResultAction>
       <hashTree/>
@@ -537,7 +535,7 @@ props.put(&apos;sort.vals.arr&apos;, sortStrsArr)
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Common Assertion">
+        <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Common Assertion" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -557,9 +555,9 @@ if (err != null &amp;&amp; err == &quot;true&quot;) {
           <stringProp name="throughput">${ratePerMin}</stringProp>
         </ConstantThroughputTimer>
         <hashTree/>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="ONCE ONLY: Go To Starting Main Page - Level 0 - and Change Result Page Number if Available"/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="ONCE ONLY: Go To Starting Main Page - Level 0 - and Change Result Page Number if Available" enabled="true"/>
         <hashTree>
-          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoToStartingPage_Level0">
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoToStartingPage_Level0" enabled="true">
             <boolProp name="HTTPSampler.image_parser">true</boolProp>
             <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
             <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -646,7 +644,7 @@ try {
 </stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Pagination Details String Extractor">
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Pagination Details String Extractor" enabled="true">
               <stringProp name="RegexExtractor.useHeaders">false</stringProp>
               <stringProp name="RegexExtractor.refname">paginationStr</stringProp>
               <stringProp name="RegexExtractor.regex">\&quot;pagination\&quot;:\{\&quot;totalNumberOfItems\&quot;:([0-9]+),\&quot;currentPage\&quot;:([0-9]+),\&quot;pageSize\&quot;:([0-9]+),\&quot;totalPages\&quot;:([0-9]+),\&quot;onFirstPage\&quot;:([a-z]+)\}</stringProp>
@@ -668,7 +666,7 @@ try {
               <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
             </BoundaryExtractor>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Level0 Page Object">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Level0 Page Object" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -746,13 +744,13 @@ try {
             </JSR223PostProcessor>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Is A New Page Number Available To Go To">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Is A New Page Number Available To Go To" enabled="true">
             <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().nextPageIsDifferentThanCurrentPage())}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
           </IfController>
           <hashTree>
-            <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoToAnotherResultPage_Level0_To_Page${nextPage}">
+            <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoToAnotherResultPage_Level0_To_Page${nextPage}" enabled="true">
               <boolProp name="HTTPSampler.image_parser">true</boolProp>
               <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
               <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -892,13 +890,13 @@ try {
             </hashTree>
           </hashTree>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If  Iteration ${numItersToTriggerSortType} Change Sort Criteria">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If  Iteration ${numItersToTriggerSortType} Change Sort Criteria" enabled="true">
           <stringProp name="IfController.condition">${__groovy(vars.get(&apos;numItersToDoBeforeTriggerSortTypeChange&apos;).toInteger() &gt; 0 ? (vars.get(&apos;__jm__productThreadGroup__idx&apos;).toInteger() + 1) % vars.get(&apos;numItersToDoBeforeTriggerSortTypeChange&apos;).toInteger() == 0 : false)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoChangeSort_Level0_To${nextSortVal}">
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoChangeSort_Level0_To${nextSortVal}" enabled="true">
             <boolProp name="HTTPSampler.image_parser">true</boolProp>
             <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
             <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -939,7 +937,7 @@ try {
             <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
           </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
           <hashTree>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="GoChangeSort_Level0 Set newPath and sortVal">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="GoChangeSort_Level0 Set newPath and sortVal" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -962,7 +960,7 @@ try {
 }</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Main Target Links String Block Extractor">
+            <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Main Target Links String Block Extractor" enabled="true">
               <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
               <stringProp name="BoundaryExtractor.refname">targetLinksStrBlock</stringProp>
               <stringProp name="BoundaryExtractor.lboundary">&lt;h1 class=&quot;page-header&quot;&gt;${pageContentHeader}&lt;/h1&gt;</stringProp>
@@ -973,7 +971,7 @@ try {
               <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
             </BoundaryExtractor>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Update Level0 Page Object - Add Order">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Update Level0 Page Object - Add Order" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1062,13 +1060,13 @@ try {
             <hashTree/>
           </hashTree>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Picture Paths On This Main Page">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Picture Paths On This Main Page" enabled="true">
           <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().productPicPathArrHasEntries())}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="GoToProductPictureController">
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="GoToProductPictureController" enabled="true">
             <collectionProp name="ModuleController.node_path">
               <stringProp name="764597751">Test Plan</stringProp>
               <stringProp name="402066857">CLovejoyProdPagesTest Plan</stringProp>
@@ -1078,17 +1076,17 @@ try {
           </ModuleController>
           <hashTree/>
         </hashTree>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LC_DrillDownLevels ">
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LC_DrillDownLevels " enabled="true">
           <stringProp name="LoopController.loops">${drillLevelMax}</stringProp>
         </LoopController>
         <hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Left Column Links on this Page">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Left Column Links on this Page" enabled="true">
             <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().sideColPathArrHasEntries())}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
           </IfController>
           <hashTree>
-            <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="SelectLeftColumnPath_Level${transDispNextLevel}${sortVal}">
+            <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="SelectLeftColumnPath_Level${transDispNextLevel}${sortVal}" enabled="true">
               <boolProp name="HTTPSampler.image_parser">true</boolProp>
               <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
               <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -1129,7 +1127,7 @@ try {
               <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
             </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
             <hashTree>
-              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set newPath Level${transDispNextLevel}">
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set newPath Level${transDispNextLevel}" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
@@ -1147,7 +1145,7 @@ try {
 </stringProp>
               </JSR223PreProcessor>
               <hashTree/>
-              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Left Col Links String Block Extractor">
+              <BoundaryExtractor guiclass="BoundaryExtractorGui" testclass="BoundaryExtractor" testname="Left Col Links String Block Extractor" enabled="true">
                 <stringProp name="BoundaryExtractor.useHeaders">false</stringProp>
                 <stringProp name="BoundaryExtractor.refname">targetLinksStrBlock</stringProp>
                 <stringProp name="BoundaryExtractor.lboundary">&lt;h1 class=&quot;page-header&quot;&gt;${pageContentHeader}&lt;/h1&gt;</stringProp>
@@ -1158,7 +1156,7 @@ try {
                 <stringProp name="TestPlan.comments">Making sure we only work with products and URL paths falling below the ${pageContentHeader} header - extract the block of text between the boundaries and then use the Page Objects class to parse out the links in the extracted text.</stringProp>
               </BoundaryExtractor>
               <hashTree/>
-              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Level${transDispNextLevel} Page Object">
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Create Level${transDispNextLevel} Page Object" enabled="true">
                 <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
@@ -1243,13 +1241,13 @@ try {
               </JSR223PostProcessor>
               <hashTree/>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Pic Paths Available on this Page">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If There Are Pic Paths Available on this Page" enabled="true">
               <stringProp name="IfController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).getLastObject().productPicPathArrHasEntries())}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
             </IfController>
             <hashTree>
-              <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="GoToProductPictureController">
+              <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="GoToProductPictureController" enabled="true">
                 <collectionProp name="ModuleController.node_path">
                   <stringProp name="764597751">Test Plan</stringProp>
                   <stringProp name="402066857">CLovejoyProdPagesTest Plan</stringProp>
@@ -1261,11 +1259,11 @@ try {
             </hashTree>
           </hashTree>
         </hashTree>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller Going Back To Level 0 Page">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="While Controller Going Back To Level 0 Page" enabled="true">
           <stringProp name="WhileController.condition">${__groovy(vars.getObject(&apos;pageObjList&apos;).pageObjectsListSize() &gt; 1)}</stringProp>
         </WhileController>
         <hashTree>
-          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoBackToPreviousPage_Level${transDispPrevLevel}${sortVal}">
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoBackToPreviousPage_Level${transDispPrevLevel}${sortVal}" enabled="true">
             <boolProp name="HTTPSampler.image_parser">true</boolProp>
             <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
             <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -1306,7 +1304,7 @@ try {
             <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
           </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
           <hashTree>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Remove Current Page Object_Level${transDispPrevLevel}">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Remove Current Page Object_Level${transDispPrevLevel}" enabled="true">
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
@@ -1332,7 +1330,7 @@ try {
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Manage the Level Display">
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Manage the Level Display" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1355,7 +1353,7 @@ try {
 </stringProp>
             </JSR223PostProcessor>
             <hashTree/>
-            <CompareAssertion guiclass="TestBeanGUI" testclass="CompareAssertion" testname="Compare Assertion">
+            <CompareAssertion guiclass="TestBeanGUI" testclass="CompareAssertion" testname="Compare Assertion" enabled="true">
               <boolProp name="compareContent">true</boolProp>
               <longProp name="compareTime">-1</longProp>
               <collectionProp name="stringsToSkip"/>
@@ -1365,7 +1363,7 @@ try {
         </hashTree>
         <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GoToProductPictureController" enabled="false"/>
         <hashTree>
-          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoProductPicture">
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoProductPicture" enabled="true">
             <boolProp name="HTTPSampler.image_parser">true</boolProp>
             <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
             <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -1406,7 +1404,7 @@ try {
             <stringProp name="HTTP2Sampler.h2cCacheTtlMs">300000</stringProp>
           </com.blazemeter.jmeter.http2.sampler.HTTP2Sampler>
           <hashTree>
-            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set picPathToUse">
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set picPathToUse" enabled="true">
               <stringProp name="scriptLanguage">groovy</stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
@@ -1424,7 +1422,7 @@ try {
 </stringProp>
             </JSR223PreProcessor>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="GoToProductLinkViaPicture Assertion">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="GoToProductLinkViaPicture Assertion" enabled="true">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-1209048565">og:price:amount</stringProp>
               </collectionProp>
@@ -1435,7 +1433,7 @@ try {
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
-          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoBackToPreviousPage_Level${transDispCurrLevel}${sortVal}">
+          <com.blazemeter.jmeter.http2.sampler.HTTP2Sampler guiclass="com.blazemeter.jmeter.http2.sampler.gui.HTTP2SamplerGui" testclass="com.blazemeter.jmeter.http2.sampler.HTTP2Sampler" testname="GoBackToPreviousPage_Level${transDispCurrLevel}${sortVal}" enabled="true">
             <boolProp name="HTTPSampler.image_parser">true</boolProp>
             <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
             <stringProp name="HTTPSampler.concurrentPool">100</stringProp>
@@ -1523,7 +1521,7 @@ try {
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer">
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -1557,7 +1555,7 @@ try {
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">C:\results.jtl</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="false">
